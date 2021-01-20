@@ -282,3 +282,15 @@ Do you like the weather in your country?
 Is the weather the same in all parts of your country?
 Does the weather ever affect the way you feel?
 Does the weather in your country ever affect transportation?
+
+### Patente
+
+A comunicação humana é uma habilidade ímpar para o desenvolvimento da sociedade. Melhorar essa habilidade e ser capaz de se comunicar com eficácia é igualmente importante para que seja possível transmitir ideias de modo eficiente e claro, evitando prejuízos ao longo da interação.
+
+Todas as interações humanas resultam da comunicação. Então, estabelecer uma comunicação eficiente no ambiente corporativo é tão importante quanto qualquer outra habilidade que os profissionais possam possuir.
+
+Por meio da comunicação são estabelecidos os objetivos de um projeto, seus detalhes, processos, entre outros aspectos. Como resultado de uma comunicação eficiente, um projeto pode ser eficiente, ágil e com valor.
+
+Em contraste a esse cenário, uma comunicação deficiente leva a mal-entendidos e frustrações, sendo previsível a necessidade de retrabalho, coletar novamente informações, compartilhar novamente dados já enviados, etc.
+
+O valor de nossa ferramenta é ser auxiliar para que uma comunicação efiente seja estabelecida, sem ruídos, considerando seu contexto em que é desempenhado.
