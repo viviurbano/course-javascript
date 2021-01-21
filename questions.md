@@ -285,15 +285,21 @@ Does the weather in your country ever affect transportation?
 
 ### Patente
 
-A comunicação humana é uma habilidade ímpar para o desenvolvimento da sociedade. Melhorar essa habilidade e ser capaz de se comunicar com eficácia é igualmente importante para que seja possível transmitir ideias de modo eficiente e claro, evitando prejuízos ao longo da interação.
+Raramente as reuniões são eficientes em termos de tempo gasto e obtenção de resultados, especialmente reuniões com vários participantes.
 
-Todas as interações humanas resultam da comunicação. Então, estabelecer uma comunicação eficiente no ambiente corporativo é tão importante quanto qualquer outra habilidade que os profissionais possam possuir.
+Muitos fatores podem contribuir para a falta de cumprimento de metas, como o contexto da reunião, déficit de foco por parte dos jogadores, contribuintes despreparados, dados insuficientes sobre os tópicos discutidos, perturbar ou sequestrar a reunião, ausência de um objetivo ou motivação clara, pessoas essenciais falta de participar, etc.
 
-Por meio da comunicação são estabelecidos os objetivos de um projeto, seus detalhes, processos, entre outros aspectos. Como resultado de uma comunicação eficiente, um projeto pode ser eficiente, ágil e com valor.
+Todos os itens mencionados e outros mais são importantes para reuniões bem-sucedidas, e a proposta descrita nesta invenção ajuda a resolver alguns desses problemas ao introduzir um sistema e um método baseado em um assistente coletivo inteligente. A patente proposta utiliza dados históricos e técnicas de análise e aprendizado para coletar dados das reuniões e enviar ativamente feedback aos participantes, ajudando-os a atingir seus próprios objetivos e, fundamentalmente, o objetivo coletivo da reunião.
 
-Em contraste a esse cenário, uma comunicação deficiente leva a mal-entendidos e frustrações, sendo previsível a necessidade de retrabalho, coletar novamente informações, compartilhar novamente dados já enviados, etc.
+Nosso método atua como apoio aos usuários para entender o contexto do assunto que será discutido e a partir do módulo de feedback fornecer as sugestões adequadas para evitar falta de informação.
 
-O valor de nossa ferramenta é ser auxiliar para que uma comunicação efiente seja estabelecida, sem ruídos, considerando seu contexto em que é desempenhado.
+Em uma situação de reunião de trabalho, o método e sistema pode ser utilizado para analisar previamente a pauta da reunião, bem como os participantes. A partir dessas informações, o método poderia sugerir que algum participante, considerando seu papel e skills, seja convidado. O método poderia também, a partir da análise da pauta, sugerir que sejam inclusos tópicos para que o contexto da reunião seja produtivo.
+
+Ainda tendo em vista reuniões no trabalho, o método e sistema pode contribuir durante a reunião. Com base no módulo dados históricos, nossa invenção atua na validação dos tópicos, checando se em situações anteriores foram aborados mais detalhes a respeito do tópico, se é necessário que algum aspecto ainda não discutido precisa ainda ser tratado e, caso seja, quem poderia trazer o assunto à discussão.
+
+Com base no contexto da reunião e perfil dos participantes, nossa invenção também prevê que, a partir do módulo de aprendizado, o participante receba um alerta para que em determinado momento compartilhe alguma informação ou dado que possui.
+
+##
 
                 maximo-7.6/maximo7610-db2-weblogic/docker-compose.yaml
 
@@ -325,4 +331,18 @@ Natalie Sanders
    Yes, there are people from many different countries here. Braziliens are known to be a great confunsing including our origins.
 
 5. How would you describe the architecture in your hometown?
-   A great place, with buildings
+   A great place, with huge contrats between buildings, great houses and favelas.
+
+--
+
+1.
+2. a
+3. f
+4.
+5. e
+6.
+7. j
+8. 9.h
+9. d
+10. b
+11.

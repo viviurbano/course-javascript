@@ -1,5 +1,5 @@
 'use strict';
-//duas formas de selecionar um elemento por meio do ID
+//duas formas de selecionar um elemento por meio do ID ou querySelector
 let player0El = document.querySelector('.player--0');
 let player1El = document.querySelector('.player--1');
 const score0El = document.querySelector('#score--0');
