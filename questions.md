@@ -294,3 +294,35 @@ Por meio da comunicação são estabelecidos os objetivos de um projeto, seus de
 Em contraste a esse cenário, uma comunicação deficiente leva a mal-entendidos e frustrações, sendo previsível a necessidade de retrabalho, coletar novamente informações, compartilhar novamente dados já enviados, etc.
 
 O valor de nossa ferramenta é ser auxiliar para que uma comunicação efiente seja estabelecida, sem ruídos, considerando seu contexto em que é desempenhado.
+
+                maximo-7.6/maximo7610-db2-weblogic/docker-compose.yaml
+
+// primeiro a executar.. tem erros, não inicia
+docker-compose -f samples/maximo7610-db2-weblogic/docker-compose.yaml -p maximo-example up -d
+
+// segunda execução
+cd /Users/vivianeurbano/Development/maximo-docker-master/
+docker-compose -f samples/maximo76-db2-weblogic-iss/docker-compose.yaml -p maximo-example up -d
+
+maximo76-db2-weblogic-iss
+
+https://150.239.9.165:9444/maximo/webclient/login/login.jsp?welcome=true
+
+Maximo Core -> 7611 - build de 19 dez 2018
+Natalie Sanders
+
+1. What are the main industries in your hometown or home country?
+   We are know about being a really agro country. Ih the decade of 1950, Juscelino Kubistech adoped a statement "50 years in 5".
+   He tried develop technology in Brazil, but he didn't succed. We are still really big in agrobusiness, but not exactly because we are great doing this, but because here there are lots of space to plant.
+
+2. Would you like to have a job working in the media? Why or why not?
+   I wouldn't. I am good working in technology. I believe that working in media you have to be creative in a serious way, so I think that I couldn't succed.
+
+3. Is your city cosmopolitan?
+   Yes, São Paulo City is a huge cosmopolitan place. We receive people from all places of the world.
+
+4. Are there many ethnicities in your country, do do most people have the same origins?
+   Yes, there are people from many different countries here. Braziliens are known to be a great confunsing including our origins.
+
+5. How would you describe the architecture in your hometown?
+   A great place, with buildings
