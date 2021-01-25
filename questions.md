@@ -332,17 +332,3 @@ Natalie Sanders
 
 5. How would you describe the architecture in your hometown?
    A great place, with huge contrats between buildings, great houses and favelas.
-
---
-
-1.
-2. a
-3. f
-4.
-5. e
-6.
-7. j
-8. 9.h
-9. d
-10. b
-11.
