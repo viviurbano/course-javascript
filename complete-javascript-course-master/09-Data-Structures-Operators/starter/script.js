@@ -56,17 +56,39 @@ const restaurant = {
 // têm uma propriedade chamada 'short circuiting'
 // short circuiting -> significa que se o primeiro valor fornecido for verdadeiro,
 //então esse valor será retornado. O js não vai nem olhar para o segundo valor
-console.log(3 || 'Vivi');
-console.log('Vivi' || 3);
-console.log('' || 'Vivi');
-console.log(true || 0);
-console.log(undefined || null);
 
-restaurant;
-// como a propriedade restaurant.numGuests não existe e portanto não é válida
-// o operador ternário abaixo vai retornar 10, que é um valor válido
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guests1);
+// console.log(`----- OR -------`);
+// console.log(3 || 'Vivi');
+// console.log('Vivi' || 3);
+// console.log('' || 'Vivi');
+// console.log(true || 0);
+// console.log(undefined || null);
+
+// console.log(`----- AND -------`);
+// console.log(0 && 'Jonas');
+// console.log(7 && 'Jonas');
+
+// if (restaurant.orderPizza) {
+//   restaurant.orderPizza(`mushroom`, 'spinach');
+//}
+
+// let x = restaurant.orderPizza && restaurant.orderPizza(`mushroom`, 'spinach');
+// console.log(`X: `, x);
+
+// Operador de coalescência nula
+restaurant.numGuests = 0;
+
+const guests1 = restaurant.numGuests || 10;
+console.log(`guests: `, guests1);
+
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(`guests correct: `, guestCorrect);
+
+// restaurant;
+// // como a propriedade restaurant.numGuests não existe e portanto não é válida
+// // o operador ternário abaixo vai retornar 10, que é um valor válido
+// const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+// console.log(guests1);
 
 // let arr = [7, 8, 9];
 // const badNewArray = [1, 2, arr[0], arr[1], arr[2]];
@@ -115,7 +137,7 @@ console.log(guests1);
 
 // 1) Destructuring
 // SPREAD because on right side of =
-const arr = [1, 2, ...[3, 4]];
+// const arr = [1, 2, ...[3, 4]];
 
 //REST, because on LEFT side of =
 // const [...others] = [1, 2, 3, 4, 5];
@@ -129,20 +151,20 @@ const arr = [1, 2, ...[3, 4]];
 // console.log('Array: ', pizza, risotto, otherFood);
 
 // // Objetos
-const { fri, ...otherDays } = restaurant.openingHours;
-console.log('Other Days', otherDays);
-console.log('Thursday : ', fri);
+// const { fri, ...otherDays } = restaurant.openingHours;
+// console.log('Other Days', otherDays);
+// console.log('Thursday : ', fri);
 
 // // 2) Funções ###
-const add = function (...numbers) {
-  let sum = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    sum += numbers[i];
-    console.log('Funcão adição: ', sum);
-  }
-};
+// const add = function (...numbers) {
+//   let sum = 0;
+//   for (let i = 0; i < numbers.length; i++) {
+//     sum += numbers[i];
+//     console.log('Funcão adição: ', sum);
+//   }
+// };
 
-add(1, 2, 3, 4, 5);
+// add(1, 2, 3, 4, 5);
 
 // const x = [23, 5, 7];
 // add(...x);
@@ -150,16 +172,16 @@ add(1, 2, 3, 4, 5);
 // restaurant.orderPizza('queijo', 'queijo', 'ovo', 'presunto', 'spinach');
 // restaurant.orderPizza('queijo');
 
-let xx = ['Viviane'];
-let bb = ['xx'];
-//pega cada um dos elementos para inserir no novo array
-let newArrr = [...xx, ...bb];
-console.log(newArrr);
-console.log('####');
+// let xx = ['Viviane'];
+// let bb = ['xx'];
+// //pega cada um dos elementos para inserir no novo array
+// let newArrr = [...xx, ...bb];
+// console.log(newArrr);
+// console.log('####');
 
 //copia o array propriamente e faz uma cópia para o novo array
-let newArrr2 = [xx, bb];
-console.log(newArrr2);
+// let newArrr2 = [xx, bb];
+// console.log(newArrr2);
 // console.log(newArrr2);
 //junta o array
 // console.log(...xx, ...bb);
