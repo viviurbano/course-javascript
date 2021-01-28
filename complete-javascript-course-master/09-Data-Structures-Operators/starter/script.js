@@ -51,6 +51,24 @@ const restaurant = {
   },
 };
 
+console.table(restaurant);
+const arr = [1, 2, 3, 4, 5];
+const [x, y, z] = arr;
+console.log(x, y, z);
+
+const [first, , third, fourth] = restaurant.categories;
+console.log(first, third, fourth);
+
+let [main, secondary] = restaurant.categories;
+let [mainStartMenu, secondStartMenu, , fouthStartMenu] = restaurant.starterMenu;
+
+[secondStartMenu, mainStartMenu, fouthStartMenu] = [
+  mainStartMenu,
+  secondStartMenu,
+  fouthStartMenu,
+];
+console.log(mainStartMenu, secondStartMenu, fouthStartMenu);
+
 // && and ||
 // podem ser usados para retornar qualquer tipo de dado, não apenas para boolean
 // têm uma propriedade chamada 'short circuiting'
@@ -75,14 +93,14 @@ const restaurant = {
 // let x = restaurant.orderPizza && restaurant.orderPizza(`mushroom`, 'spinach');
 // console.log(`X: `, x);
 
-// Operador de coalescência nula
-restaurant.numGuests = 0;
+// // Operador de coalescência nula
+// restaurant.numGuests = 0;
 
-const guests1 = restaurant.numGuests || 10;
-console.log(`guests: `, guests1);
+// const guests1 = restaurant.numGuests || 10;
+// console.log(`guests: `, guests1);
 
-const guestCorrect = restaurant.numGuests ?? 10;
-console.log(`guests correct: `, guestCorrect);
+// const guestCorrect = restaurant.numGuests ?? 10;
+// console.log(`guests correct: `, guestCorrect);
 
 // restaurant;
 // // como a propriedade restaurant.numGuests não existe e portanto não é válida
@@ -283,3 +301,46 @@ console.log(`guests correct: `, guestCorrect);
 // // default values
 // const [p, q, r] = [8, 9];
 // console.log(p, q, r);
+
+// code challenge
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
