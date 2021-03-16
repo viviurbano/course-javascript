@@ -1,5 +1,47 @@
 'use strict';
 
+/**
+
+1. Substantivo
+Substantivo é a palavra que nomeia os seres em geral, desde objetos, fenômenos, lugares, qualidades, ações, dentre outros, tais como: Ana, Brasil, beleza.
+
+2. Verbo - Função
+Verbo é a palavra que indica ações, estado ou fenômeno da natureza, tais como: sairemos, corro, chovendo.
+
+
+3. Adjetivo
+Adjetivo é a palavra que caracteriza, atribui qualidades aos substantivos, tais como: feliz, superinteressante, amável.
+
+4. Pronome
+Pronome é a palavra que substitui ou acompanha o substantivo, indicando a relação das pessoas do discurso, tais como: eu, contigo, aquele.
+
+5. Artigo
+Artigo é a palavra que antecede o substantivo, tais como: o, as, uns, uma.
+
+6. Numeral
+Numeral é a palavra que indica a posição ou o número de elementos, tais como: um, primeiro, dezenas.
+
+7. Preposição
+Preposição é a palavra que liga dois elementos da oração, tais como: a, após, para.
+
+8. Conjunção
+Conjunção é a palavra que liga dois termos ou duas orações de mesmo valor gramatical, tais como: mas, portanto, conforme.
+
+9. Interjeição
+Interjeição é a palavra que exprime emoções e sentimentos, tais como: Olá!, Viva! Psiu!.
+
+10. Advérbio
+Advérbio é a palavra que modifica o verbo, o adjetivo ou outro advérbio, exprimindo circunstâncias de tempo, modo, intensidade, entre outros, tais como: melhor, demais, ali.
+
+
+
+
+
+
+
+
+ */
+
 const novaPropriedade = {
   primeiroItem: {
     nome: 'Primeiro',
@@ -1033,6 +1075,31 @@ document.querySelector('button').addEventListener('click', function () {
   }
 });
 
+// #################### String Methods practise ####################
+// #################### String Methods practise ####################
+
+// Data needed for a later exercise
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+
+const getCode = str => str.slice(0, 3).toUpperCase();
+
+for (let flight of flights.split('+')) {
+  const [type, from, to, time] = flight.split(';');
+  // console.log(type, from, to, time);
+  const output = ` ${type.startsWith('_Delayed') ? '🛑' : ''} ${type.replaceAll(
+    '_',
+    ' '
+  )}, from ${getCode(from)} to ${getCode(to)} (${time
+    .replace(':', 'h')
+    .toUpperCase()})`.padStart(50);
+
+  console.log(output);
+}
+
+// console.log(flightInfo);
+
 // const capitalizeName = function (name) {
 //   const names = name.split(' ');
 //   const namesUpper = [];
@@ -1045,3 +1112,23 @@ document.querySelector('button').addEventListener('click', function () {
 // };
 
 // capitalizeName('viviane urbano');
+// capitalizeName('xuxa meneghel');
+
+// const a = [2, 1, 3, 5, 3, 2];
+// const a = [2, 2];
+// const a = [2];
+// const a = [1, 1, 2, 2, 1];
+
+// function firstDuplicate(a) {
+//   const mySet = new Set(a);
+//   const myArr = [...mySet];
+
+//   for (let i = 0; i <= a.length; i++) {
+//     if (a[i] !== myArr[i]) {
+//       return console.log(a[i]);
+//     }
+//   }
+//   return -1;
+// }
+
+// firstDuplicate(a);
