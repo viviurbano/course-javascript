@@ -208,5 +208,47 @@ console.log(addVAT2(23));
 // Coding Challenge #1
 const poll = {
   question: 'What is your favourite programming Language?',
-  opition: ['xx'],
+  option: ['0: Javascript', '1: Python', '2: Rust', '3: C++'],
+  // gera um array só com zeros [0,0,0,0]
+  answers: new Array(4).fill(0),
 };
+
+poll.registerNewAnswer = function () {
+  let answer = Number(
+    prompt(`What is your favourite programming Language?
+  0: Javascript
+  1: Python
+  2: Rust
+  3: C++
+
+  Write option number
+  `)
+  );
+
+  switch (answer) {
+    case 0:
+      poll.answers[0]++;
+      break;
+    case 1:
+      poll.answers[1]++;
+      break;
+    case 2:
+      poll.answers[2]++;
+      break;
+    case 3:
+      poll.answers[3]++;
+      break;
+  }
+
+  console.log(poll.answers);
+};
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer());
+
+// let meu = poll.registerNewAnswer();
+
+// document
+//   .querySelector('.buy')
+//   .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
