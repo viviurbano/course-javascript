@@ -255,14 +255,134 @@
 // (() => console.log('This will never run again 2'))();
 // Na realidade esse padrão é pouco usado já que o novo modo de declarar variáveis com const e let tornaram melhor o modo de lidar com variáveis em escopo
 
-// // Closures
+// ############ Closures
 
-function init() {
-  var name = 'Mozilla'; // name is a local variable created by init
-  function displayName() {
-    // displayName() is the inner function, a closure
-    alert(name); // displayName() uses variable declared in the parent function
+// function init() {
+//   var name = 'Princesa Rainha do Universo'; // name is a local variable created by init
+//   function displayName() {
+//     // displayName() is the inner function, a closure
+//     alert(name); // displayName() uses variable declared in the parent function
+//   }
+//   displayName();
+// }
+// init();
+
+// function makeFunc() {
+//   const name = 'Princesa Rainha do Universo';
+//   function displayName() {
+//     alert(name);
+//   }
+//   return displayName;
+// }
+
+// var myFunc = makeFunc();
+// myFunc();
+
+// const secureBooking = function () {
+//   let passagerCount = 0;
+
+//   return function () {
+//     passagerCount++;
+//     console.log(`${passagerCount} passagers`);
+//   };
+// };
+
+// const booker = secureBooking();
+// booker();
+// booker();
+// booker();
+
+// /**
+// A closure is the close-over variable environment of the execution context on which a function was reated, even after that execution context is gone.
+//  */
+
+// /** less formal definition
+// A closure gives a function access to all the variables of its parent function, even after that parent function has returned. The function keeps a reference to its outer scope, which preserves the scope chain throughout time
+//  */
+
+// /**
+//  A closure makes sure that a function doesn't loose connection to variables that existed at the functions's birth place
+//  */
+
+// /**
+// A closure is like a backpack that a function carries around wherever it goes. This backpack has all the variables that were present in the environment where the function was created
+//  */
+
+// /**
+// We do NOT have to manually create closures, this is a JavaScript feature that happens automatically.
+// We can't even access closed-over variables explicitly.
+// A closure is NOT a tangible JavaScript object
+//  */
+
+// // Para dar uma olhada nas propriedades closure:
+// console.dir(booker);
+// //olhe o [[Scopes]]. Observe que a sintaxe já traz algo 'envelopado'. Isso também mostra que essa propriedade não pode ser acessada pelo nosso código.
+// // Olhe a propriedade Closure
+
+// let f;
+
+// const g = function () {
+//   const a = 23;
+//   f = function () {
+//     console.log(a * 2);
+//   };
+// };
+
+// const h = function () {
+//   const b = 777;
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
+
+// g();
+// f();
+// console.dir(f);
+// // funcão foi reatribuida em h()
+// h();
+// f();
+// console.dir(f);
+
+// // Example 2
+// const boardPassengers = function (n, wait) {
+//   const perGroup = n / 3;
+
+//   // essa função será executada depois, de modo independente mas ainda lembrando de seu contexto inicial
+//   setTimeout(() => {
+//     console.log(`We are now boarding all ${n} passengers`);
+//     console.log(`There are 3 groups, each with ${perGroup} passengers`);
+//   }, wait * 1000);
+
+//   console.log(`Will start boarding in ${wait} seconds`);
+// };
+
+// const perGroup = 333;
+// boardPassengers(210, 3);
+
+// function makeAdder(x) {
+//   return function (y) {
+//     return x + y;
+//   };
+// }
+
+// let add5 = makeAdder(5);
+// let add10 = makeAdder(33);
+
+// console.log(add5(2)); // 7
+// console.log(add10(2)); // 12
+
+// Coding challenge
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+})();
+
+document.body.addEventListener('click', function () {
+  const newColour = document.querySelector('h1');
+  if (newColour.style.color === 'red') {
+    newColour.style.color = 'blue';
+  } else {
+    newColour.style.color = 'red';
   }
-  displayName();
-}
-init();
+});
