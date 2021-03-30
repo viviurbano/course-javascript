@@ -71,6 +71,79 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
+/////////////////////////////////////////////////
+// arrays têm métodos
+// Lembre-se que métodos são funções que podemos chamar em objetos
+// Isso significa que são funções anexadas em objetos
+// Então, se há métodos em arrays, isso significa que o próprio array é também um objeto
+// Como arrays também são objetos, eles têm accesso a 'special build in methods' que funcionam como ferramentas para os arrays
+
+// let arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+
+// // o slice funciona um pouco diferente aqui. Ele retorna todo o restante do array a partir do índice indicado como parâmetro
+// console.log(arr.slice(2));
+
+// // se quiser, pode indicar o início e o fim
+// console.log(arr.slice(2, 4));
+
+// //last element
+// console.log(arr.slice(-1));
+
+// // SPLICE - Funciona de modo similar ao slice, entretanto MODIFICA o array original
+// console.log(arr.splice(5));
+
+// console.log(arr.splice(2, 5));
+// console.log(arr);
+
+// // REVERSE - também modifica o array original, revertendo a ordem dos elementos
+// let arr2 = ['b', 'd', 'e', 'f', 'a', 'c'];
+// arr2.reverse();
+// console.log(arr2);
+
+// // CONCAT - não muda o array
+// const letters = arr.concat(arr2);
+// console.log(letters);
+
+// console.log(arr);
+
+// // JOIN - inclui caractere escolhido entre os elementos do array
+// console.log(letters.join(' - '));
+
+// ForEach
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-/////////////////////////////////////////////////
+// // For of para relembrar
+// for (const movement of movements) {
+//   if (movement > 0) {
+//     console.log(`✅ You deposited ${movement}`);
+//   } else {
+//     console.log(`🅾️ You withdrew ${Math.abs(movement)}`);
+//   }
+// }
+
+movements.forEach(function (movement, index) {
+  if (movement > 0) {
+    console.log(`Moviment: ${index + 1} - ✅ You deposited ${movement}`);
+  } else {
+    console.log(
+      `Moviment: ${index + 1} - 🅾️ You withdrew ${Math.abs(movement)}`
+    );
+  }
+});
+
+// a diferença fundamental entre o forEach e o for of é que o forEach não pode ser interrompido. Não aceita break
+
+// const x = [1, 2, 3];
+// x.forEach(function (el) {
+//   el = el + 1;
+// });
+// console.log(x);
+
+// let arr = [1, 2, 3, 4];
+// let x = arr.forEach((val, index) => (arr[index] = val * val));
+// console.log(x);
+
+let arr = [1, 2, 3, 4];
+let x = arr.map(val => val * val);
+arr = x;
+console.log(arr);
