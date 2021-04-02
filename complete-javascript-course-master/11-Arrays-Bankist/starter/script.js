@@ -65,12 +65,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
 /////////////////////////////////////////////////
 // arrays têm métodos
 // Lembre-se que métodos são funções que podemos chamar em objetos
@@ -109,41 +103,137 @@ const currencies = new Map([
 // // JOIN - inclui caractere escolhido entre os elementos do array
 // console.log(letters.join(' - '));
 
-// ForEach
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// // ForEach
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// // For of para relembrar
-// for (const movement of movements) {
+// // // For of para relembrar
+// // for (const movement of movements) {
+// //   if (movement > 0) {
+// //     console.log(`✅ You deposited ${movement}`);
+// //   } else {
+// //     console.log(`🅾️ You withdrew ${Math.abs(movement)}`);
+// //   }
+// // }
+
+// movements.forEach(function (movement, index) {
 //   if (movement > 0) {
-//     console.log(`✅ You deposited ${movement}`);
+//     console.log(`Moviment: ${index + 1} - ✅ You deposited ${movement}`);
 //   } else {
-//     console.log(`🅾️ You withdrew ${Math.abs(movement)}`);
+//     console.log(
+//       `Moviment: ${index + 1} - 🅾️ You withdrew ${Math.abs(movement)}`
+//     );
 //   }
-// }
-
-movements.forEach(function (movement, index) {
-  if (movement > 0) {
-    console.log(`Moviment: ${index + 1} - ✅ You deposited ${movement}`);
-  } else {
-    console.log(
-      `Moviment: ${index + 1} - 🅾️ You withdrew ${Math.abs(movement)}`
-    );
-  }
-});
-
-// a diferença fundamental entre o forEach e o for of é que o forEach não pode ser interrompido. Não aceita break
-
-// const x = [1, 2, 3];
-// x.forEach(function (el) {
-//   el = el + 1;
 // });
-// console.log(x);
+
+// // a diferença fundamental entre o forEach e o for of é que o forEach não pode ser interrompido. Não aceita break
+
+// // const x = [1, 2, 3];
+// // x.forEach(function (el) {
+// //   el = el + 1;
+// // });
+// // console.log(x);
+
+// // let arr = [1, 2, 3, 4];
+// // let x = arr.forEach((val, index) => (arr[index] = val * val));
+// // console.log(x);
 
 // let arr = [1, 2, 3, 4];
-// let x = arr.forEach((val, index) => (arr[index] = val * val));
-// console.log(x);
+// let x = arr.map(val => val * val);
+// arr = x;
+// console.log(arr);
 
-let arr = [1, 2, 3, 4];
-let x = arr.map(val => val * val);
-arr = x;
-console.log(arr);
+// ForEach with maps and sets
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function (value, key) {
+  console.log(`${key.padStart(4)}: ${value.padEnd(10)}`);
+});
+
+// Set
+
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+
+// console.log(currenciesUnique);
+currenciesUnique.forEach(function (value) {
+  console.log(`${value.padEnd(10)}`);
+});
+
+// // um pouco mais sobre callback
+
+// // 1º: É apresentado um alerta com o conteúdo “2”;
+// // 2º: Após cinco segundos, o próximo alerta é exibido, com conteúdo “1”.
+
+// setTimeout(() => alert('1'), 5000);
+// alert('2');
+
+// function callback(e) {
+//   alert('Aconteceu um evento ' + e.type);
+// }
+// window.addEventListener('click', callback);
+
+// let salarioBruto = 3000;
+// let salarioLiquido;
+
+// getSalario(salarioBruto, resultado => {
+//   salarioLiquido = resultado;
+//   console.log(`O salário liquido é ${salarioLiquido}`);
+// });
+
+// function getSalario(salarioBruto, callback) {
+//   let liquido = 0;
+//   const inss = salarioBruto * 0.11;
+//   const vr = salarioBruto * 0.05;
+//   const vt = salarioBruto * 0.06;
+//   const fgts = salarioBruto * 0.15;
+//   const descontos = inss + vr + vt + fgts;
+//   liquido = salarioBruto - descontos;
+
+//   return callback(liquido);
+// }
+
+// function greeting(name, t) {
+//   alert('Hello ' + name + t);
+// }
+
+// function processUserInput(callback) {
+//   var name = prompt('Please enter your name.');
+//   var texto = ' texto criado';
+//   callback(name, texto);
+// }
+
+// processUserInput(greeting);
+
+// const myF = callback => {
+//   const val = 77;
+
+//   callback(val);
+// };
+
+// myF(function (number) {
+//   console.log(number);
+// });
+
+// const myOwnExample = callback => {
+//   const name = '';
+//   callback(name);
+// };
+
+// myOwnExample(function (name) {
+//   name = prompt('insert your name');
+//   console.log(`Your name is ${name}`);
+// });
+
+// myOwnExample(function (nome) {
+//   nome = prompt('this is a test to understand how this works');
+//   console.log(`Come from myOwnExample2 ${nome}`);
+// });
+
+// const arr = [11, 22, 33, 44, 55, 66];
+// arr.forEach(function (el, index, todoArray) {
+//   console.log(index + 1, el, todoArray);
+// });
