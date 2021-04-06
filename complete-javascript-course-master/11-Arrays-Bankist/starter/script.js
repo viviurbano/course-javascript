@@ -1,6 +1,43 @@
 'use strict';
 
 /////////////////////////////////////////////////
+// hacker rank
+
+// const n = 7; //number or socks
+// // const arr = [1, 1, 3, 1, 2, 1, 3, 3, 3, 3]; //color of each sock
+
+// let ar = [10, 20, 20, 10, 10, 30, 50, 10, 20];
+
+// function sockMerchant(n, ar) {
+//   let count = 0;
+//   ar = ar.sort();
+//   for (let i = 0; i < n - 1; i++) {
+//     if (ar[i] === ar[i + 1]) {
+//       count++;
+//       i += 1;
+//     }
+//   }
+//   return count;
+// }
+
+// console.log(sockMerchant(n, ar));
+
+// let steps = 8;
+// const path = 'UDDDUDUU';
+//
+// function countingValleys(steps, path) {
+// let seaLevel = 0;
+// let countingValleys = 0;
+// for (let i = 0; i < steps; i++) {
+// console.log(path[i]);
+// if (path[i] === 'D') {
+// }
+// }
+// }
+//
+// console.log(countingValleys(steps, path));
+
+/////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
 
@@ -61,6 +98,32 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  movements.forEach(function (element, index) {
+    console.log(`${element}, ${index}`);
+
+    const html = `
+    <div class="movements__row">
+    <div class="movements__type movements__type--deposit">${index + 1}</div>
+    <div class="movements__value">${element}€</div>
+  </div>`;
+  });
+};
+
+console.log(displayMovements(account1.movements));
+
+// btnLogin.addEventListener('click', function (e) {
+//   e.preventDefault();
+//   currentAccount = accounts.find(
+//     (acc = acc.username === inputLoginUsername.value)
+//   );
+
+//   if (currentAccount && currentAccount.pin === +inputLoginPin.value) {
+//     console.log(currentAccount);
+//   }
+// });
+
+/**
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -144,24 +207,24 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // ForEach with maps and sets
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-currencies.forEach(function (value, key) {
-  console.log(`${key.padStart(4)}: ${value.padEnd(10)}`);
-});
+// currencies.forEach(function (value, key) {
+//   console.log(`${key.padStart(4)}: ${value.padEnd(10)}`);
+// });
 
-// Set
+// // Set
 
-const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+// const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
 
-// console.log(currenciesUnique);
-currenciesUnique.forEach(function (value) {
-  console.log(`${value.padEnd(10)}`);
-});
+// // console.log(currenciesUnique);
+// currenciesUnique.forEach(function (value) {
+//   console.log(`${value.padEnd(10)}`);
+// });
 
 // // um pouco mais sobre callback
 
@@ -237,3 +300,4 @@ currenciesUnique.forEach(function (value) {
 // arr.forEach(function (el, index, todoArray) {
 //   console.log(index + 1, el, todoArray);
 // });
+*/
