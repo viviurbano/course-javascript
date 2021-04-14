@@ -98,15 +98,19 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
-  movements.forEach(function (element, index) {
-    console.log(`${element}, ${index}`);
+const displayMovements = function (arr) {
+  arr.forEach((mov, i) => {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
     <div class="movements__row">
-    <div class="movements__type movements__type--deposit">${index + 1}</div>
-    <div class="movements__value">${element}€</div>
-  </div>`;
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+      <div class="movements__value">${mov}€</div>
+    </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
 
