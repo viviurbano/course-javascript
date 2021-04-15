@@ -1,5 +1,4 @@
 'use strict';
-
 // BANKIST APP
 
 // Data
@@ -77,7 +76,7 @@ const displayMovements = function (arr) {
   });
 };
 
-console.log(displayMovements(account1.movements));
+// console.log(displayMovements(account1.movements));
 
 // btnLogin.addEventListener('click', function (e) {
 //   e.preventDefault();
@@ -268,3 +267,47 @@ console.log(displayMovements(account1.movements));
 //   console.log(index + 1, el, todoArray);
 // });
 */
+
+// // Coding Challange #1
+
+// const juliaData1 = [3, 5, 2, 12, 7];
+// const kateData1 = [4, 1, 15, 8, 3];
+
+// const juliaData2 = [9, 16, 6, 8, 3];
+// const kateData2 = [10, 5, 6, 1, 4];
+
+// const copyJuliaData1 = juliaData1.slice(1, 3);
+// console.log(copyJuliaData1);
+// const copyJuliaData2 = juliaData2.slice(1, 3);
+// console.log(copyJuliaData2);
+
+// const allDogs = [
+//   ...copyJuliaData1,
+//   ...copyJuliaData2,
+//   ...kateData1,
+//   ...kateData2,
+// ];
+
+// const checkDogs = function (arr) {
+//   arr.forEach((age, index) => {
+//     if (age < 3) {
+//       console.log(
+//         `Dog number ${index + 1} is still a puppy 🐶. He has only ${age}`
+//       );
+//     } else {
+//       console.log(
+//         `Dog number ${index + 1} is an adult 🦋. He already has ${age}`
+//       );
+//     }
+//   });
+// };
+
+// checkDogs(allDogs);
+
+// Métodos aplicados em arrays
+// # Map - copia o array original, aplicando alguma função sobre cada um dos seus elementos.
+// Retorna um novo array que é resutlados da função aplicada a cada elemento
+
+// # Filter - retorna um novo array apenas com os elementos que satisfazem à condição do filtro aplicado
+
+// # Reduce - precisa de um acumulador que vai 'acumular' os valores do array e retornar o valor final de todos os elementos
