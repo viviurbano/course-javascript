@@ -1,44 +1,5 @@
 'use strict';
 
-/////////////////////////////////////////////////
-// hacker rank
-
-// const n = 7; //number or socks
-// // const arr = [1, 1, 3, 1, 2, 1, 3, 3, 3, 3]; //color of each sock
-
-// let ar = [10, 20, 20, 10, 10, 30, 50, 10, 20];
-
-// function sockMerchant(n, ar) {
-//   let count = 0;
-//   ar = ar.sort();
-//   for (let i = 0; i < n - 1; i++) {
-//     if (ar[i] === ar[i + 1]) {
-//       count++;
-//       i += 1;
-//     }
-//   }
-//   return count;
-// }
-
-// console.log(sockMerchant(n, ar));
-
-// let steps = 8;
-// const path = 'UDDDUDUU';
-//
-// function countingValleys(steps, path) {
-// let seaLevel = 0;
-// let countingValleys = 0;
-// for (let i = 0; i < steps; i++) {
-// console.log(path[i]);
-// if (path[i] === 'D') {
-// }
-// }
-// }
-//
-// console.log(countingValleys(steps, path));
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
 // BANKIST APP
 
 // Data
@@ -99,6 +60,8 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function (arr) {
+  containerMovements.innerHTML = '';
+
   arr.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
