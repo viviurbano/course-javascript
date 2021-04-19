@@ -76,6 +76,19 @@ const displayMovements = function (arr) {
   });
 };
 
+const user = 'Steven Thomas Williams';
+
+const createUsernames = function (accounts) {
+  const username = user
+    .toLowerCase()
+    .split(' ')
+    .map(name => name[0])
+    .join('');
+  return username;
+};
+
+console.log(createUsernames(user));
+
 // console.log(displayMovements(account1.movements));
 
 // btnLogin.addEventListener('click', function (e) {
@@ -305,9 +318,36 @@ const displayMovements = function (arr) {
 // checkDogs(allDogs);
 
 // Métodos aplicados em arrays
-// # Map - copia o array original, aplicando alguma função sobre cada um dos seus elementos.
-// Retorna um novo array que é resutlados da função aplicada a cada elemento
+// # Map - copia o array original, aplicando determinada função sobre cada um dos seus elementos.
+// Retorna um novo array com os resultados da função aplicada a cada elemento
 
 // # Filter - retorna um novo array apenas com os elementos que satisfazem à condição do filtro aplicado
 
 // # Reduce - precisa de um acumulador que vai 'acumular' os valores do array e retornar o valor final de todos os elementos
+
+// const movements = [5000, 3400, -150, -790, -3210, -1000, 8500, -30];
+// const euroToUsd = 1.1;
+
+// const movemntsUsd = movements.map(function (mov) {
+//   return (mov * euroToUsd).toFixed(2);
+// });
+
+// const movemntsUsdArrow = movements.map(mov => (mov * euroToUsd).toFixed(2));
+
+// const movementsDescriptions = movements.map((mov, i) => {
+//   return `Movement ${i + 1}: You ${
+//     mov > 0 ? 'deposited' : 'withdrew'
+//   } ${Math.abs(mov)}`;
+// });
+
+// // console.log(movementsDescriptions);
+
+// // assim como o forEach, o método map tem acesso a 3 parâmetros:
+// // elemento, index e ao array completo
+// const movementsDescriptionsTernary = movements.map(
+//   (mov, i) =>
+//     `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+//       mov
+//     )}`
+// );
+// console.log(movementsDescriptionsTernary);
