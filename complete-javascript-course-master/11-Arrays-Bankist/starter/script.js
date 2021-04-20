@@ -76,18 +76,35 @@ const displayMovements = function (arr) {
   });
 };
 
-const user = 'Steven Thomas Williams';
-
-const createUsernames = function (accounts) {
-  const username = user
-    .toLowerCase()
-    .split(' ')
-    .map(name => name[0])
-    .join('');
-  return username;
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, cur) => acc + cur, 0);
+  labelBalance.textContent = `${balance} €`;
 };
 
-console.log(createUsernames(user));
+calcDisplayBalance(account1.movements);
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+// O Split retorna um array
+// forEach não muda o array
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+createUsernames(accounts);
+
+// labelSumIn.textContent = `${deposit}`;
+
+const withdrawal = movements.filter(mov => mov < 0);
+
+// acc ->accumularor. Serve justamente para acumular algum valor
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
 
 // console.log(displayMovements(account1.movements));
 
@@ -281,13 +298,32 @@ console.log(createUsernames(user));
 // });
 */
 
+// // Maximo value of array
+// const max = movements.reduce((acc, mov) => {
+//   if (acc > mov) return acc;
+//   else return mov;
+// }, movements[0]);
+// console.log(max);
+
+// const min = movements.reduce((acc, mov) => {
+//   if (acc < mov) return acc;
+//   else return mov;
+// }, movements[0]);
+// console.log(min);
+
+// // De acordo com o prof, o reduce é o método mais poderoso que tem. E justamente por isso, também pode ser o mais difícil de lidar
+
+const juliaData1 = [3, 5, 2, 12, 7];
+const juliaData2 = [9, 16, 6, 8, 3];
+
+const kateData1 = [4, 1, 15, 8, 3];
+const kateData2 = [10, 5, 6, 1, 4];
+
+console.log(calcAvaregeHumanAge(juliaData1));
+
+// // Coding Challange #2
+
 // // Coding Challange #1
-
-// const juliaData1 = [3, 5, 2, 12, 7];
-// const kateData1 = [4, 1, 15, 8, 3];
-
-// const juliaData2 = [9, 16, 6, 8, 3];
-// const kateData2 = [10, 5, 6, 1, 4];
 
 // const copyJuliaData1 = juliaData1.slice(1, 3);
 // console.log(copyJuliaData1);
