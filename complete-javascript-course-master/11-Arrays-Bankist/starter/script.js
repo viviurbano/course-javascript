@@ -313,15 +313,44 @@ const balance = movements.reduce((acc, cur) => acc + cur, 0);
 
 // // De acordo com o prof, o reduce é o método mais poderoso que tem. E justamente por isso, também pode ser o mais difícil de lidar
 
+// // Coding Challange #2
+
 const juliaData1 = [3, 5, 2, 12, 7];
 const juliaData2 = [9, 16, 6, 8, 3];
 
 const kateData1 = [4, 1, 15, 8, 3];
 const kateData2 = [10, 5, 6, 1, 4];
 
-console.log(calcAvaregeHumanAge(juliaData1));
+// let calcAvaregeHumanAge = function (ages) {
+//1
+// let humanAge = [];
+// ages.forEach((dogAge, index) => {
+//   if (dogAge <= 2) {
+//     humanAge.push(dogAge * 2);
+//     console.log(`${index}: ${humanAge}`);
+//   } else if (dogAge > 2) {
+//     humanAge.push(16 + dogAge * 4);
+//     console.log(`${index}: ${humanAge}`);
+//   }
+// });
+// console.log(`arr humanAge ${humanAge}`);
 
-// // Coding Challange #2
+//   const humanAges = ages.map(age => (age <= 2 ? age * 2 : 16 + age * 4));
+//   console.log(humanAges);
+
+//   //2
+//   const olderDogs = humanAges.filter(age => age >= 18);
+//   console.log(`adult dogs ${olderDogs}`);
+
+//   // //3
+//   const avgAge =
+//     olderDogs.reduce((acc, avgAge) => acc + avgAge, 0) / olderDogs.length;
+//   return avgAge;
+// };
+
+// const withdrawal = movements.filter(mov => mov < 0);
+
+// const avg1 = console.log(calcAvaregeHumanAge(testData));
 
 // // Coding Challange #1
 
@@ -387,3 +416,41 @@ console.log(calcAvaregeHumanAge(juliaData1));
 //     )}`
 // );
 // console.log(movementsDescriptionsTernary);
+
+// let person = {
+//   age: 10,
+//   checkAge: function () {
+//     console.log(age);
+//   },
+// };
+
+// let Person = function (initialAge) {
+//   // Add some more code to run some checks on initialAge
+//   if (initialAge > 0) this.age = initialAge;
+//   else {
+//     this.age = 0;
+//     console.log('Age is not valid, setting age to 0.');
+//   }
+//   this.amIOld = function () {
+//     // Do some computations in here and print out the correct statement to the console
+//     if (this.age < 13) console.log('You are young.');
+//     else if (this.age < 18) console.log('You are a teenager.');
+//     else console.log('You are old.');
+//   };
+//   this.yearPasses = function () {
+//     this.age++;
+//   };
+// };
+
+// Person(10);
+
+// const stringWords = `Tuesday, Thursday, cheque, in advance, annual fee, monthly membership, interest rate, tuition fees, poverty, bank statement, money management, current account, student account, low-risk investment, mortgage, grace period, budget deficit, retail voucher, coupon، counterfeit money, public money, taxpayers’ money, interest-free credit, partial refund, annuity, non-refundable, distribution costs, income, duty-free store, archaeology, course outline, handout, proofreading, student advisor, teamwork, assessment, lecture, tutor, attendance, give a talk, placement test, overseas students, facilities, college, commencement, leaflet, faculty, pupils, outcomes, extra background, compound, student retention, registrar’s office, stationery, leadership, questionnaire, survey,poll, profit margin, training, trainee, merchandise, keep-fit, salad bar, disease, meal, carbohydrates, rice, meat, seafood, yoghurt, green pepper, blackcurrant, egg yolk, liver, medicine treatment, remedy, nursing care, nursery, footbridge, forest, reef, lake, valley, hill, cliff, island, peninsula, earthquake, avalanche, tornado, typhoon, desertification, landslides, hurricane, pond, dam, canyon, greenhouse effect, burring fossil, exhaust fumes, deforestation, nitrogen oxide, smog, climate, pollution, temperature, power plants, landfill, cattle, wind turbine, soar power, hydroelectric power, soil conditioner, coal, fossil fuels, firewood, drought, contaminated, birds of prey, seabirds, poultry and game, mammals, cetacean,rodents, amphibian, octopus, phylum, genus, livestock, creature, lion, penguin, mushroom, leaves, seed, core, bark, trunk, twig, stem, fertilizer, Switzerland, the Philippines, Punjabi, Thai, Persian, Filipino, dome, log cabin, lighthouse, hut, skyscraper, semi-detached house, duplex, terraced house, town house, row house, bungalow, thatched cottage, mobile home, houseboat, block of flats, building, condominium, chimney, landlord, tenant, rent, lease, neighborhood, suburb, sofa, ground floor, hallway, embassy, road system,appointment, staff selection, workshop, unemployed, ability, vision, confidence, reasonable, spotted, striped, single double bedded room, surpass, hunt, persuade, ancient, necessary, exciting, fabulous, dull, immense, vast, salty, knowledgeable, confident, Western, tranquil, orienteering, caving, spelunking, archery, ice skating, scuba-diving, snorkeling, skateboarding, bowls, darts, golf, billiards, pottery, woodcarving, gardening, stamp collection, embroidery, climbing, cricket, baseball, basketball, rugby, soccer, American football, hockey, swimming, tennis, squash, badminton, field, court, pitch, the discus, the javelin, the hammer, the high jump, show jumping, polo, cycling, gymnasium, athlete, gym, extreme sports, paragliding, hang-gliding, skydiving, abseiling, snowboarding, bungee jumping, surfing, windsurfing, jet-skiing, bodyboarding, white-water rafting, kitesurfing, mountain biking, jogging, press-up, push-up, barbell, treadmill, canoeing, refreshment, Square, cylindrical, width, length, altitude, depth, breadth, height, cargo plane, shipment, container ship, boat, lifeboat, ferry, hovercraft, hydrofoil, liner, canal boat, narrowboat, dinghy sailing, sailboat, paddle steamer, cabin cruiser, rowing boat, rowboat, kayak, canoe, punt, gondola, seaplane, airship, hot-air balloon, hire a car, double-decker bus, single-decker, minibus, coach, truck, tanker, van, lorry, transporter, forklift truck, tow truck, breakdown truck, pickup, jeep, caravan, camper, tractor, tram, underground, subway, stream train, freight train, goods train, sticky, breeze, chilly, cold, cool, freezing, wet, weather forecast, antenna, moisture, cottage, parliament, canteen, bookshop, city council, dance studio, park, conversation club, kindergarten, helmet, cassette, silicon chip, gadget, device, breaks, mechanical pencil, disk, fur, metal, copper, rubber, wool, leather, lumber/wood, composite, wax, feather, craftsman, lecturer, office assistant, clerk, accountant, cashier, a gap year, fortnight, original inhabitant, indigenous, strike, carriage, personal fulfillment, recipient, ultrasound, pedestrian safety, traffic jams, driving license, literary, man-made, frequently updated, sewer systems, lunar calendar, libertarian, burger, life expectancy, fund-raising event, magnet, ramification, straight, farewell, welfare, illiteracy, robot, accomplishment,`;
+
+// let newS = stringWords
+//   .split(',')
+//   .map(elem => elem.trim())
+//   .join('\n')
+//   .toLowerCase();
+
+// // newS = newS.join('\n');
+// console.log(newS);
