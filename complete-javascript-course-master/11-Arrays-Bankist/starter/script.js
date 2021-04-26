@@ -76,9 +76,11 @@ const displayMovements = function (arr) {
   });
 };
 
+displayMovements(account1.movements);
+
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${balance} €`;
+  labelBalance.textContent = `${balance}€`;
 };
 
 calcDisplayBalance(account1.movements);
@@ -106,8 +108,6 @@ const withdrawal = movements.filter(mov => mov < 0);
 // acc ->accumularor. Serve justamente para acumular algum valor
 const balance = movements.reduce((acc, cur) => acc + cur, 0);
 
-// console.log(displayMovements(account1.movements));
-
 // btnLogin.addEventListener('click', function (e) {
 //   e.preventDefault();
 //   currentAccount = accounts.find(
@@ -118,6 +118,31 @@ const balance = movements.reduce((acc, cur) => acc + cur, 0);
 //     console.log(currentAccount);
 //   }
 // });
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}`;
+
+  const outcomes = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(outcomes)}`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      // console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+
+  labelSumInterest.textContent = `${interest}`;
+};
+
+calcDisplaySummary(account1.movements);
 
 /**
 /////////////////////////////////////////////////
@@ -349,11 +374,9 @@ const kateData2 = [10, 5, 6, 1, 4];
 // };
 
 // const withdrawal = movements.filter(mov => mov < 0);
-
 // const avg1 = console.log(calcAvaregeHumanAge(testData));
 
 // // Coding Challange #1
-
 // const copyJuliaData1 = juliaData1.slice(1, 3);
 // console.log(copyJuliaData1);
 // const copyJuliaData2 = juliaData2.slice(1, 3);
@@ -454,3 +477,73 @@ const kateData2 = [10, 5, 6, 1, 4];
 
 // // newS = newS.join('\n');
 // console.log(newS);
+
+// Chaining methods map filter reduce
+// works like a pipeline
+// const euroToUsd = 1.1;
+
+// const totalDepositUSD = movements
+//   .filter(mov => mov > 0)
+//   .map(mov => mov * euroToUsd)
+//   .reduce((acc, mov) => acc + mov, 0)
+//   .toFixed(2);
+
+// console.log(totalDepositUSD);
+
+// const totalDepositUSDDebug = movements
+//   .filter(mov => mov > 0)
+//   .map((mov, i, arr) => {
+//     console.log(`array item ${i}: ${mov}`);
+//     return mov * euroToUsd;
+//   })
+//   .reduce((acc, mov) => acc + mov, 0)
+//   .toFixed(2);
+
+// // Coding Challange #3
+let calcAvaregeHumanAgeChain = ages =>
+  ages
+    .map(age => (age <= 2 ? age * 2 : 16 + age + 4))
+    .filter(age => age > 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length);
+// ages.map(age => (age <= 2 ? age * 2 : 16 + age + 4));
+
+//     .reduce((acc, age, i, arr) => acc + age / arr.length); É nessa linha, no el `arr` que conseguimos o tamanho correto do array para cálculo
+
+// console.log(calcAvaregeHumanAgeChain(juliaData1));
+
+// Find method
+// usar o Find é literalmente procurar algo em um array
+// Facilita a busca em arrays que contém objetos de estrutura similar
+// no array accounts, por exemplo, todos têm a propriedade `acc.owner`
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// numbers.forEach((el, index) => console.log(`${el} x ${el} = ${el * index}`));
+
+function processData(input) {
+  //Enter your code here
+  message = input.split('\n');
+
+  var n = parseInt(message[0]);
+
+  for (var x = 0; x < n; x++) {
+    var m = message[x + 1];
+    var l = m.length;
+    var arr = m.split('');
+    var ra = '';
+    var rb = '';
+
+    for (var y = 0; y < l; y++) {
+      if (y % 2 == 0) ra = ra + arr[y];
+      else rb = rb + arr[y];
+    }
+    console.log(ra + ' ' + rb);
+  }
+}
+
+processData(`2222
+palavr`);
+
+// const humanAges = ages.map(age => (age <= 2 ? age * 2 : 16 + age * 4));
