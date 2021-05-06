@@ -58,15 +58,17 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (arr) {
+const displayMovements = function (arr, sort = false) {
   containerMovements.innerHTML = '';
 
-  arr.forEach((mov, i) => {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
     <div class="movements__row">
-      <div class="movements__type movements__type--${type}">${
+      <div class="movements__type movements__type--${type}"> ${
       i + 1
     } ${type}</div>
       <div class="movements__value">${mov}€</div>
@@ -76,14 +78,11 @@ const displayMovements = function (arr) {
   });
 };
 
-displayMovements(account1.movements);
-
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${balance}€`;
+//buscar o objeto inteiro, já que vamos lidar com mais de uma propriedade
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance}€`;
 };
-
-calcDisplayBalance(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -94,19 +93,172 @@ const createUsernames = function (accs) {
       .join('');
   });
 };
+
+// Aqui é passado o array com todos os usuários, já que qualquer um poderia logar
+createUsernames(accounts);
+
+//função para atualizar os valores do extrato na tela
+// aqui vai receber uma conta só, no caso, do usuário logado
+const updateUI = function (acc) {
+  //display movements
+  displayMovements(acc.movements);
+
+  //display balance
+  calcDisplayBalance(acc);
+
+  //display summary
+  // aqui precisa passar o objeto inteiro pq a função vai usar 2 propriedades
+  calcDisplaySummary(acc);
+};
+
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}`;
+
+  const outcomes = acc.movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(outcomes)}`;
+  // a label já é vermelha, então não precisa do negativo
+
+  const interest = acc.movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * acc.interestRate) / 100)
+    .filter((int, i, arr) => {
+      // console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+
+  labelSumInterest.textContent = `${interest}€`;
+};
+
+///////////////////////////////////////
+// Event handlers
+
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  // this preventDefault change the default behavior of the Form js, that is reload the page
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  // usando a versão `if (currentAccount?.pin === Number(inputLoginPin.value))` lançaria erro. A versão abaixo ' mais elegante'
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //display UI and welcome message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+
+    //muda a visualização do aparecer
+    containerApp.style.opacity = 100;
+
+    // clear input fields
+    inputLoginUsername.value = '';
+    inputLoginPin.value = '';
+    // para o mouse para de piscar no PIN
+    inputLoginPin.blur();
+
+    // Update dos valores da UI -já que tem que retornar os valores do usuário que logou
+    updateUI(currentAccount);
+  }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    currentAccount.movements.push(amount);
+    updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = '';
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  const amount = Number(inputTransferAmount.value);
+
+  //verificar se o usuário tem dinheiro para emprestar
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    //transferência entre as contas de quem vai fornecer x receber o dinheiro
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    //Update UI
+    updateUI(currentAccount);
+  }
+
+  inputTransferAmount.value = '';
+  inputTransferTo.value = '';
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    accounts.splice(index, 1);
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+  }
+
+  inputCloseUsername.value = '';
+  inputClosePin.value = '';
+});
+
+// no incício o array de movements não está organizado
+let sorted = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  // altera o estado da variável sort
+  sorted = !sorted;
+});
+
+// currentAccount?.pin === Number(inputLoginPin.value)
+
+/**
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// LECTURES
+
+/////////////////////////////////////////////////
+
 // O Split retorna um array
 // forEach não muda o array
+// o splice muda o conteúdo do array
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-createUsernames(accounts);
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // labelSumIn.textContent = `${deposit}`;
 
-const withdrawal = movements.filter(mov => mov < 0);
-
 // acc ->accumularor. Serve justamente para acumular algum valor
-const balance = movements.reduce((acc, cur) => acc + cur, 0);
+// const balance = movements.reduce((acc, cur) => acc + cur, 0);
 
 // btnLogin.addEventListener('click', function (e) {
 //   e.preventDefault();
@@ -119,37 +271,7 @@ const balance = movements.reduce((acc, cur) => acc + cur, 0);
 //   }
 // });
 
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
-    .filter(mov => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}`;
 
-  const outcomes = movements
-    .filter(mov => mov < 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(outcomes)}`;
-
-  const interest = movements
-    .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
-    .filter((int, i, arr) => {
-      // console.log(arr);
-      return int >= 1;
-    })
-    .reduce((acc, int) => acc + int, 0);
-
-  labelSumInterest.textContent = `${interest}`;
-};
-
-calcDisplaySummary(account1.movements);
-
-/**
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-/////////////////////////////////////////////////
 // arrays têm métodos
 // Lembre-se que métodos são funções que podemos chamar em objetos
 // Isso significa que são funções anexadas em objetos
@@ -340,11 +462,11 @@ calcDisplaySummary(account1.movements);
 
 // // Coding Challange #2
 
-const juliaData1 = [3, 5, 2, 12, 7];
-const juliaData2 = [9, 16, 6, 8, 3];
+// const juliaData1 = [3, 5, 2, 12, 7];
+// const juliaData2 = [9, 16, 6, 8, 3];
 
-const kateData1 = [4, 1, 15, 8, 3];
-const kateData2 = [10, 5, 6, 1, 4];
+// const kateData1 = [4, 1, 15, 8, 3];
+// const kateData2 = [10, 5, 6, 1, 4];
 
 // let calcAvaregeHumanAge = function (ages) {
 //1
@@ -467,8 +589,6 @@ const kateData2 = [10, 5, 6, 1, 4];
 
 // Person(10);
 
-// const stringWords = `Tuesday, Thursday, cheque, in advance, annual fee, monthly membership, interest rate, tuition fees, poverty, bank statement, money management, current account, student account, low-risk investment, mortgage, grace period, budget deficit, retail voucher, coupon، counterfeit money, public money, taxpayers’ money, interest-free credit, partial refund, annuity, non-refundable, distribution costs, income, duty-free store, archaeology, course outline, handout, proofreading, student advisor, teamwork, assessment, lecture, tutor, attendance, give a talk, placement test, overseas students, facilities, college, commencement, leaflet, faculty, pupils, outcomes, extra background, compound, student retention, registrar’s office, stationery, leadership, questionnaire, survey,poll, profit margin, training, trainee, merchandise, keep-fit, salad bar, disease, meal, carbohydrates, rice, meat, seafood, yoghurt, green pepper, blackcurrant, egg yolk, liver, medicine treatment, remedy, nursing care, nursery, footbridge, forest, reef, lake, valley, hill, cliff, island, peninsula, earthquake, avalanche, tornado, typhoon, desertification, landslides, hurricane, pond, dam, canyon, greenhouse effect, burring fossil, exhaust fumes, deforestation, nitrogen oxide, smog, climate, pollution, temperature, power plants, landfill, cattle, wind turbine, soar power, hydroelectric power, soil conditioner, coal, fossil fuels, firewood, drought, contaminated, birds of prey, seabirds, poultry and game, mammals, cetacean,rodents, amphibian, octopus, phylum, genus, livestock, creature, lion, penguin, mushroom, leaves, seed, core, bark, trunk, twig, stem, fertilizer, Switzerland, the Philippines, Punjabi, Thai, Persian, Filipino, dome, log cabin, lighthouse, hut, skyscraper, semi-detached house, duplex, terraced house, town house, row house, bungalow, thatched cottage, mobile home, houseboat, block of flats, building, condominium, chimney, landlord, tenant, rent, lease, neighborhood, suburb, sofa, ground floor, hallway, embassy, road system,appointment, staff selection, workshop, unemployed, ability, vision, confidence, reasonable, spotted, striped, single double bedded room, surpass, hunt, persuade, ancient, necessary, exciting, fabulous, dull, immense, vast, salty, knowledgeable, confident, Western, tranquil, orienteering, caving, spelunking, archery, ice skating, scuba-diving, snorkeling, skateboarding, bowls, darts, golf, billiards, pottery, woodcarving, gardening, stamp collection, embroidery, climbing, cricket, baseball, basketball, rugby, soccer, American football, hockey, swimming, tennis, squash, badminton, field, court, pitch, the discus, the javelin, the hammer, the high jump, show jumping, polo, cycling, gymnasium, athlete, gym, extreme sports, paragliding, hang-gliding, skydiving, abseiling, snowboarding, bungee jumping, surfing, windsurfing, jet-skiing, bodyboarding, white-water rafting, kitesurfing, mountain biking, jogging, press-up, push-up, barbell, treadmill, canoeing, refreshment, Square, cylindrical, width, length, altitude, depth, breadth, height, cargo plane, shipment, container ship, boat, lifeboat, ferry, hovercraft, hydrofoil, liner, canal boat, narrowboat, dinghy sailing, sailboat, paddle steamer, cabin cruiser, rowing boat, rowboat, kayak, canoe, punt, gondola, seaplane, airship, hot-air balloon, hire a car, double-decker bus, single-decker, minibus, coach, truck, tanker, van, lorry, transporter, forklift truck, tow truck, breakdown truck, pickup, jeep, caravan, camper, tractor, tram, underground, subway, stream train, freight train, goods train, sticky, breeze, chilly, cold, cool, freezing, wet, weather forecast, antenna, moisture, cottage, parliament, canteen, bookshop, city council, dance studio, park, conversation club, kindergarten, helmet, cassette, silicon chip, gadget, device, breaks, mechanical pencil, disk, fur, metal, copper, rubber, wool, leather, lumber/wood, composite, wax, feather, craftsman, lecturer, office assistant, clerk, accountant, cashier, a gap year, fortnight, original inhabitant, indigenous, strike, carriage, personal fulfillment, recipient, ultrasound, pedestrian safety, traffic jams, driving license, literary, man-made, frequently updated, sewer systems, lunar calendar, libertarian, burger, life expectancy, fund-raising event, magnet, ramification, straight, farewell, welfare, illiteracy, robot, accomplishment,`;
-
 // let newS = stringWords
 //   .split(',')
 //   .map(elem => elem.trim())
@@ -513,37 +633,337 @@ let calcAvaregeHumanAgeChain = ages =>
 
 // Find method
 // usar o Find é literalmente procurar algo em um array
-// Facilita a busca em arrays que contém objetos de estrutura similar
+// É mais fácil efetuar buscas em arrays que contém objetos de estrutura similar, dado que se deseja buscar um elemento exato
 // no array accounts, por exemplo, todos têm a propriedade `acc.owner`
-const account = accounts.find(acc => acc.owner === 'Jessica Davis');
-console.log(account);
+// O find parece com o filter, mas vale lembrar que o find não retorna um array, mas um valor.
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// console.log(accounts);
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account);
 
-// numbers.forEach((el, index) => console.log(`${el} x ${el} = ${el * index}`));
+// const firstWithdral = movements.find(mov => mov < 0);
+// console.log(movements);
+// console.log(firstWithdral);
 
-function processData(input) {
-  //Enter your code here
-  message = input.split('\n');
+// const question = new Map([
+//   [3][('sam', '99912222')],
+//   ['tom', '11122222'],
+//   ['2', '12299933'],
+// ]);
 
-  var n = parseInt(message[0]);
+// Some
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-  for (var x = 0; x < n; x++) {
-    var m = message[x + 1];
-    var l = m.length;
-    var arr = m.split('');
-    var ra = '';
-    var rb = '';
+// // verifica se no array tem exatamente o valor procurado
+// console.log(movements.includes(70));
 
-    for (var y = 0; y < l; y++) {
-      if (y % 2 == 0) ra = ra + arr[y];
-      else rb = rb + arr[y];
-    }
-    console.log(ra + ' ' + rb);
+// // verifica se no array tem exatamente algum valor de acordo com a condição especificada
+// console.log(movements.some(mov => mov > 0));
+
+//Every
+// cada um dos elementos do array deve passar na condição estabelecida
+// do contrário, retorna falso
+// console.log(movements.every(mov => mov > 0));
+// // nessa conta todos os
+// console.log(account4.movements.every(mov => mov > 0));
+
+// Separate callback
+// é possível declarar os argumentos de uma função atribuindo
+// em uma variável para poder reutilizá-la mais tarde
+// Dependendo da estrutura do seu código, isso facilita a manutenção,
+// já que a condição vai ser especificada em apenas um lugar
+
+// const deposit = mov => mov > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+// console.log(...movements.filter(deposit));
+
+// // Flat and flatmap
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
+
+// // array com mais nós
+// const arrDeep = [[[1, [2, 9, 0, [99, 89]]], 3], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(4));
+
+// // buscar a informaçao das transações que estão nos objetos
+// // armazenar os movements em um novo array, só com os valores
+// const accMovements = accounts.map(acc => acc.movements);
+// console.log(accMovements);
+
+// const allMovements = accMovements.flat();
+// console.log(allMovements);
+
+// const overalMovements = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overalMovements);
+
+// // os passos acima, mas em apenas um statement
+
+// const overBalance = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overBalance);
+
+// // FlatMap - muito comum
+// // aqui o flat desce só um nível
+// const overBalance2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overBalance2);
+
+// // Sorting values
+// const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+// // sort() muda o array original
+// console.log(owners.sort());
+// console.log(owners);
+// // sort é baseado em strings para ordenar, então ordena alfabeticamente
+// console.log(movements);
+// console.log(movements.sort());
+
+// // compare functions - também muda o array original
+// // Não é possível fazer a organização de um modo realmente bom se o array tem números e letras
+// // return <, A, B mantém a ordem
+// // return >, B, A troca a order de descendente para ascendente
+
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (b > a) return -1;
+// });
+// console.log(movements);
+
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (b > a) return 1;
+// });
+// console.log(movements);
+
+// Create and filling arrays
+
+// // gera um array com 7 elementos vazios
+// const x = new Array(7);
+// console.log(x);
+
+// const x = new Array(7);
+
+// // fill(<numero que preencherá o array>, <index onde comeca>, <index onde termina>)
+// x.fill(1, 3, 6);
+// console.log(x);
+
+// const arr = [1, 2, 3, 4, 5];
+
+// let y = Array.from({ length: 7 }, () => 1);
+// console.log(y);
+// // o _ indica que a variável não será usada
+// // const z = Array.from({ length: 7 }, (_, i) => i + 1);
+
+// const z = Array.from({ length: 7 }, (curr, i) => i + 1);
+// console.log(z);
+
+// //gerar um número aleatório - maximo 100->length
+// const w = Array.from(
+//   { length: 100 },
+//   (curr, i) => i * Math.random().toFixed(0)
+// );
+// console.log(...w);
+
+// const n = 13;
+
+// const decToBin = function (n) {
+// const resultsArr = [];
+// let resto = '';
+
+// resultsArr.push(n % 2);
+// for (let i = 0; i <= n; i++) {
+//   n = n / 2;
+//   resto = n % 2;
+//   console.log(`n: ${n} --- resto: ${resto} --- i: ${i}`);
+//   resultsArr.push(Math.floor(resto % 2));
+// }
+
+// let binario = resultsArr.reverse();
+// console.log(binario);
+
+// let contador = 0;
+// for (let i = 0; i < binario.length; i++) {
+//   if (binario[i - 1] === 1 && binario[i] === 1) {
+//     contador++;
+//   }
+// }
+// return contador;
+
+//   var n = parseInt(readLine()).toString(2);
+//   var splits = n.split('0');
+//   console.log(
+//     splits
+//       .map(function (elem) {
+//         return elem.length;
+//       })
+//       .reduce(function (a, b) {
+//         if (a > b) return a;
+//         else return b;
+//       })
+//   );
+// };
+// console.log(decToBin(n));
+
+// // 1. Quanto foi depositado ao todo no banco?
+// const bankDepositSum = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .filter(mov => mov > 0)
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(bankDepositSum);
+
+// // 2. Quantos depósitos foram de pelo menos 1.000 euros?
+// //Modo 1 de fazer - com length
+// const bankDepositThousand1 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+// console.log(bankDepositThousand1);
+
+// // Modo 2 - usando reduce
+// const bankDepositThousand2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+
+// console.log(bankDepositThousand2);
+
+// // 3. reduce  💥💥💥💥 difícil
+// const sums = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (sums, cur) => {
+//       sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+//       return sums;
+//     },
+//     { deposits: 0, withdrawals: 0 }
+//   );
+
+// console.log(sums);
+
+// // 4. Title case
+// // algumas letras viram maiúsculas
+// const convertTitleCase = function (title) {
+//   const capitalize = str => str[0].toUpperCase() + str.slice(1);
+//   const exceptions = ['a', 'an', 'the', 'but', 'or', 'not', 'on', 'in', 'with'];
+//   const titleCase = title
+//     .toLowerCase()
+//     .split(' ')
+//     .map(word =>
+//       exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+//     )
+//     .join(' ');
+//   return capitalize(titleCase);
+// };
+
+// console.log(convertTitleCase('but ARE AN examplE, HERE OR, NEW'));
+
+// // Day 08
+// const input = `7
+// sam 99912222
+// tom 11122222
+// harry 12299933
+// madruga 00000
+// barriga 9999
+// florinda
+// kiko 7777
+// sam
+// tom
+// barriga
+// flor
+// florinda
+// kiko`;
+
+// const processData = function (input) {
+//   let [numLines, ...data] = input.split('\n');
+//   numLines = parseInt(numLines);
+//   let arrData = [];
+
+//   for (let str of data) {
+//     // console.log(str.split(' '));
+//     arrData.push(str.split(' '));
+//   }
+//   // console.log(arrData);
+
+//   // apenas os nomes para a agenda
+//   const agenda = arrData.slice(0, numLines);
+//   // console.log(agenda);
+
+//   // apenas os nomes que serão procurados
+//   const searchingFor = arrData.slice(numLines);
+//   // console.log(searchingFor);
+
+//   // searchingFor.forEach(key => console.log(key));
+//   console.log(`========`);
+//   searchingFor
+//     .map(key => key)
+//     .filter(key => {
+//       // console.log(key);
+//       console.log(agenda.includes(key[0]));
+//     });
+
+//   // =================================
+
+//   // let agenda = {};
+//   // for (let i = 0; i < numLines; i++) {
+//   //   let temp = contact[i].split(' ');
+//   //   agenda[temp[0]] = agenda[temp[1]];
+//   //   // agenda[temp[0]] = temp[1];
+//   // }
+
+//   // for (let i = 0; i < numLines; i++) {
+//   //   let temp = contact[i].split(' ');
+//   //   agenda[temp[0]] = temp[1];
+//   // }
+
+//   // for (let i = numLines; i < contact.length; i++) {
+//   //   if (agenda[contact[i]]) {
+//   //     console.log(contact[i]);
+//   //     console.log(`${contact[i]}=${agenda[i]}`);
+//   //   } else console.log(`Not found`);
+//   // }
+// };
+
+// processData(input);
+
+// Day 11
+
+// const input = `1 1 1 0 0 0
+// 0 1 0 0 0 0
+// 1 1 1 0 0 0
+// 0 0 2 4 4 0
+// 0 0 0 2 0 0
+// 0 0 1 2 4 0`;
+
+// const hourglass = function (arr) {
+//   console.log(arr);
+//   const matrix = arr.split(' ').join('');
+//   console.log(matrix);
+// };
+
+// hourglass(input);
+
+// Day 16
+const S = `a`;
+
+// const strToNumber = function (s) {
+//   const numb = Number(s);
+//   if (Number(numb)) {
+//     console.log(`${numb}`);
+//   } else console.log(`Bad string`);
+// };
+
+const strToNumber2 = function (s) {
+  try {
+    const numb = Number(s) || error;
+    console.log(numb);
+  } catch (error) {
+    console.log(`Bad string`);
   }
-}
+};
 
-processData(`2222
-palavr`);
-
-// const humanAges = ages.map(age => (age <= 2 ? age * 2 : 16 + age * 4));
+strToNumber2(S);
