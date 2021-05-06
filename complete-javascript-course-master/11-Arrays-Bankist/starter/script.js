@@ -930,40 +930,40 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // processData(input);
 
+// Day 16
+// const S = `a`;
+
+// // const strToNumber = function (s) {
+// //   const numb = Number(s);
+// //   if (Number(numb)) {
+// //     console.log(`${numb}`);
+// //   } else console.log(`Bad string`);
+// // };
+
+// const strToNumber2 = function (s) {
+//   try {
+//     const numb = Number(s) || error;
+//     console.log(numb);
+//   } catch (error) {
+//     console.log(`Bad string`);
+//   }
+// };
+
+// strToNumber2(S);
+
 // Day 11
 
-// const input = `1 1 1 0 0 0
-// 0 1 0 0 0 0
-// 1 1 1 0 0 0
-// 0 0 2 4 4 0
-// 0 0 0 2 0 0
-// 0 0 1 2 4 0`;
+const input = `1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 2 4 4 0
+0 0 0 2 0 0
+0 0 1 2 4 0`;
 
-// const hourglass = function (arr) {
-//   console.log(arr);
-//   const matrix = arr.split(' ').join('');
-//   console.log(matrix);
-// };
-
-// hourglass(input);
-
-// Day 16
-const S = `a`;
-
-// const strToNumber = function (s) {
-//   const numb = Number(s);
-//   if (Number(numb)) {
-//     console.log(`${numb}`);
-//   } else console.log(`Bad string`);
-// };
-
-const strToNumber2 = function (s) {
-  try {
-    const numb = Number(s) || error;
-    console.log(numb);
-  } catch (error) {
-    console.log(`Bad string`);
-  }
+const hourglass = function (arr) {
+  const matrix = arr.split('\n');
+  console.log(matrix);
+  matrix.forEach(el => console.log(el));
 };
 
-strToNumber2(S);
+hourglass(input);
