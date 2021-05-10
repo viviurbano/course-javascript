@@ -271,7 +271,6 @@ btnSort.addEventListener('click', function (e) {
 //   }
 // });
 
-
 // arrays têm métodos
 // Lembre-se que métodos são funções que podemos chamar em objetos
 // Isso significa que são funções anexadas em objetos
@@ -348,7 +347,7 @@ btnSort.addEventListener('click', function (e) {
 // arr = x;
 // console.log(arr);
 
-// ForEach with maps and sets
+// ForEach com maps and sets
 
 // const currencies = new Map([
 //   ['USD', 'United States dollar'],
@@ -361,6 +360,7 @@ btnSort.addEventListener('click', function (e) {
 // });
 
 // // Set
+// set armazena valores únicos de qualquer tipo
 
 // const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
 
@@ -533,7 +533,7 @@ btnSort.addEventListener('click', function (e) {
 
 // # Filter - retorna um novo array apenas com os elementos que satisfazem à condição do filtro aplicado
 
-// # Reduce - precisa de um acumulador que vai 'acumular' os valores do array e retornar o valor final de todos os elementos
+// # Reduce - precisa de uma variável que vai acumular os valores da função estabelecida e, em seguida, retorna o valor final de todos os elementos. Ou seja, dada uma função, ele 'reduz' o array a um resultado
 
 // const movements = [5000, 3400, -150, -790, -3210, -1000, 8500, -30];
 // const euroToUsd = 1.1;
@@ -620,11 +620,11 @@ btnSort.addEventListener('click', function (e) {
 //   .toFixed(2);
 
 // // Coding Challange #3
-let calcAvaregeHumanAgeChain = ages =>
-  ages
-    .map(age => (age <= 2 ? age * 2 : 16 + age + 4))
-    .filter(age => age > 18)
-    .reduce((acc, age, i, arr) => acc + age / arr.length);
+// let calcAvaregeHumanAgeChain = ages =>
+//   ages
+//     .map(age => (age <= 2 ? age * 2 : 16 + age + 4))
+//     .filter(age => age > 18)
+//     .reduce((acc, age, i, arr) => acc + age / arr.length);
 // ages.map(age => (age <= 2 ? age * 2 : 16 + age + 4));
 
 //     .reduce((acc, age, i, arr) => acc + age / arr.length); É nessa linha, no el `arr` que conseguimos o tamanho correto do array para cálculo
@@ -651,12 +651,13 @@ let calcAvaregeHumanAgeChain = ages =>
 //   ['2', '12299933'],
 // ]);
 
-// Some
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// // verifica se no array tem exatamente o valor procurado
+// Include
+// // verifica se o array contém exatamente o valor procurado (sempre vai ser parâmetro único)
 // console.log(movements.includes(70));
 
+// Some
 // // verifica se no array tem exatamente algum valor de acordo com a condição especificada
 // console.log(movements.some(mov => mov > 0));
 
@@ -664,12 +665,10 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // cada um dos elementos do array deve passar na condição estabelecida
 // do contrário, retorna falso
 // console.log(movements.every(mov => mov > 0));
-// // nessa conta todos os
-// console.log(account4.movements.every(mov => mov > 0));
 
 // Separate callback
-// é possível declarar os argumentos de uma função atribuindo
-// em uma variável para poder reutilizá-la mais tarde
+// É possível declarar os argumentos de uma função atribuindo-os
+// em uma variável para reutilização mais tarde
 // Dependendo da estrutura do seu código, isso facilita a manutenção,
 // já que a condição vai ser especificada em apenas um lugar
 
@@ -718,7 +717,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // // sort() muda o array original
 // console.log(owners.sort());
 // console.log(owners);
-// // sort é baseado em strings para ordenar, então ordena alfabeticamente
+// // sort é baseado em strings para ordenar, então ordena de acordo com a tabela ASCII (se não me engano)
 // console.log(movements);
 // console.log(movements.sort());
 
@@ -808,13 +807,12 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // };
 // console.log(decToBin(n));
 
-// // 1. Quanto foi depositado ao todo no banco?
+// // 1. Ao todo, quanto foi depositado  no banco?
 // const bankDepositSum = accounts
 //   .map(acc => acc.movements)
 //   .flat()
 //   .filter(mov => mov > 0)
 //   .reduce((acc, mov) => acc + mov, 0);
-
 // console.log(bankDepositSum);
 
 // // 2. Quantos depósitos foram de pelo menos 1.000 euros?
@@ -822,14 +820,12 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // const bankDepositThousand1 = accounts
 //   .flatMap(acc => acc.movements)
 //   .filter(mov => mov >= 1000).length;
-
 // console.log(bankDepositThousand1);
 
 // // Modo 2 - usando reduce
 // const bankDepositThousand2 = accounts
 //   .flatMap(acc => acc.movements)
 //   .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
-
 // console.log(bankDepositThousand2);
 
 // // 3. reduce  💥💥💥💥 difícil
@@ -842,7 +838,6 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //     },
 //     { deposits: 0, withdrawals: 0 }
 //   );
-
 // console.log(sums);
 
 // // 4. Title case
@@ -951,19 +946,41 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // strToNumber2(S);
 
-// Day 11
+// // Day 11
 
-const input = `1 1 1 0 0 0
-0 1 0 0 0 0
-1 1 1 0 0 0
-0 0 2 4 4 0
-0 0 0 2 0 0
-0 0 1 2 4 0`;
+// const input = `1 1 1 0 0 0
+// 0 1 0 0 0 0
+// 1 1 1 0 0 0
+// 0 0 2 4 4 0
+// 0 0 0 2 0 0
+// 0 0 1 2 4 0`;
 
-const hourglass = function (arr) {
-  const matrix = arr.split('\n');
-  console.log(matrix);
-  matrix.forEach(el => console.log(el));
-};
+// const hourglass = function (arr) {
+//   const matrix = arr.split('\n');
+//   console.log(matrix);
+//   matrix.forEach(el => console.log(el));
+// };
 
-hourglass(input);
+// hourglass(input);
+
+const s = `
+amazing
+another
+third`;
+
+console.log(s.split('').join(' - '));
+
+// Diferença entre .forEach() e .map()
+// o .forEach() executa uma dada função em cada elemento de um array
+// o .map() invoca um callback passado por argumento para cada elemento do array e retorna um NOVO array
+// Map permite concatenar outros métodos como filter, reduce, etc. O forEach não permite, já que não retorna um array
+
+let arr = [1, 2, 3];
+
+// arr.forEach(el => el * 2).reduce((acc, el) => el + acc);
+// console.log(newArr);
+// console.log(arr);
+
+const newArr2 = arr.map(el => el * 2).reduce((acc, el) => el + acc);
+console.log(newArr2);
+// console.log(arr);
