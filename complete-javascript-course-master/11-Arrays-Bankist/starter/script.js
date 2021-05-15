@@ -156,7 +156,7 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
 
-    //muda a visualização do aparecer
+    //muda a visualibilidade do app
     containerApp.style.opacity = 100;
 
     // clear input fields
@@ -330,7 +330,8 @@ btnSort.addEventListener('click', function (e) {
 //   }
 // });
 
-// // a diferença fundamental entre o forEach e o for of é que o forEach não pode ser interrompido. Não aceita break
+// // a diferença fundamental entre o forEach e o for of é que o forEach não pode ser interrompido. 
+// // Não aceita break
 
 // // const x = [1, 2, 3];
 // // x.forEach(function (el) {
@@ -963,24 +964,53 @@ btnSort.addEventListener('click', function (e) {
 
 // hourglass(input);
 
-const s = `
-amazing
-another
-third`;
+// const s = `
+// amazing
+// another
+// third`;
 
-console.log(s.split('').join(' - '));
+// console.log(s.split('').join(' - '));
 
 // Diferença entre .forEach() e .map()
 // o .forEach() executa uma dada função em cada elemento de um array
 // o .map() invoca um callback passado por argumento para cada elemento do array e retorna um NOVO array
 // Map permite concatenar outros métodos como filter, reduce, etc. O forEach não permite, já que não retorna um array
 
-let arr = [1, 2, 3];
+// let arr = [1, 2, 3];
 
 // arr.forEach(el => el * 2).reduce((acc, el) => el + acc);
 // console.log(newArr);
 // console.log(arr);
 
-const newArr2 = arr.map(el => el * 2).reduce((acc, el) => el + acc);
-console.log(newArr2);
+// const newArr2 = arr.map(el => el * 2).reduce((acc, el) => el + acc);
+// console.log(newArr2);
 // console.log(arr);
+
+const dogs = [
+  { weigth: 22, currFood: 250, owners: ['Alice', 'Bob'] },
+  { weigth: 8, currFood: 200, owners: ['Matilda'] },
+  { weigth: 13, currFood: 275, owners: ['Sarah', 'John'] },
+  { weigth: 32, currFood: 340, owners: ['Michel'] },
+];
+
+dogs.forEach((dog, index) => {
+  // console.log(index, el);
+  dog.recommendedFood = ((dog.weigth ** 0.75 * 28) / 1000).toFixed(3);
+  console.log(dog.recommendedFood);
+});
+
+// dogs.find(el => console.log(el.owners));
+// const test = dogs.find(el => {
+//   el.owners === 'Sarah' ? true : false;
+// });
+
+const sarahDog = dogs
+  .map(el => el)
+  .flatMap(el => el.owners)
+  .includes('Sarah');
+
+const dogSarah = dogs.flatMap(el => el.owners).includes('Sarah');
+console.log(dogSarah);
+
+const sorting = dogs.map(el => el.recommendedFood).sort((a, b) => a - b);
+console.log(sorting);
