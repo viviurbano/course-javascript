@@ -993,24 +993,55 @@ const dogs = [
   { weigth: 32, currFood: 340, owners: ['Michel'] },
 ];
 
-dogs.forEach((dog, index) => {
-  // console.log(index, el);
-  dog.recommendedFood = ((dog.weigth ** 0.75 * 28) / 1000).toFixed(3);
-  console.log(dog.recommendedFood);
+// 1
+dogs.forEach(dog => {
+  dog.recommendedFood = Math.trunc(dog.weigth ** 0.75 * 28);
+
+  console.log(`atual: ${dog.currFood} | Recomendado ${dog.recommendedFood} `);
 });
 
-// dogs.find(el => console.log(el.owners));
-// const test = dogs.find(el => {
-//   el.owners === 'Sarah' ? true : false;
-// });
-
-const sarahDog = dogs
-  .map(el => el)
-  .flatMap(el => el.owners)
-  .includes('Sarah');
-
-const dogSarah = dogs.flatMap(el => el.owners).includes('Sarah');
+// 2
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'));
 console.log(dogSarah);
+console.log(
+  `Sarah's dog is eating ${
+    dogSarah.currFood > dogSarah.recommendedFood ? 'too much' : 'too little'
+  }`
+);
 
-const sorting = dogs.map(el => el.recommendedFood).sort((a, b) => a - b);
-console.log(sorting);
+// 3
+const ownersEatTooMuch = dogs
+  .filter(dogs => dogs.currFood > dogs.recommendedFood)
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter(dogs => dogs.currFood < dogs.recommendedFood)
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooLittle);
+
+// 4
+const stringQtd = `${ownersEatTooMuch.join(' and ')} dog's eat too much! 
+By the other side, ${ownersEatTooLittle.join(' and ')} dog's eat to little`;
+
+console.log(stringQtd);
+
+// 5
+console.log(dogs.some(dog => dog.recommendedFood === dog.currFood));
+
+// 6
+const checkEatingOk = dog =>
+  dog.currFood > dog.recommendedFood * 0.9 &&
+  dog.currFood < dog.recommendedFood * 1.1;
+
+console.log(dogs.some(checkEatingOk));
+
+// 7
+console.log(dogs.filter(checkEatingOk));
+
+// 8
+const sortingAsc = dogs.map(el => el.recommendedFood).sort((a, b) => a - b);
+console.log(...sortingAsc);
+
+const sortingDesc = dogs.map(el => el.recommendedFood).sort((a, b) => b - a);
+console.log(sortingDesc);
