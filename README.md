@@ -8,3 +8,5 @@ Instrutor - Jonas Schmedtmann
 
 [Link para o curso](https://www.udemy.com/course/the-complete-javascript-course/)
 
+no important update
+
