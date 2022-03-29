@@ -1,12 +1,7 @@
-# complete-javascript-course
+# The modern JavaScript course. 
 
-Curso da plataforma Udemy
+Instructor:  
+👨🏼‍💻 Jonas Schmedtmann
 
-**The modern JavaScript course for everyone! Master JavaScript with projects, challenges and theory**
-
-Instrutor - Jonas Schmedtmann
-
-[Link para o curso](https://www.udemy.com/course/the-complete-javascript-course/)
-
-no important update
-
+**The Complete JavaScript Course 2022: From Zero to Expert!**.   
+[Course link here](https://www.udemy.com/course/the-complete-javascript-course/)
