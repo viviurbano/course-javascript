@@ -153,14 +153,14 @@
 //   console.log(`linha número ${rep}`);
 // }
 
-const jonas = [
-  'Jonas',
-  'Silva',
-  2037 - 1991,
-  'teacher',
-  ['Mike', 'Josh', 'Ana'],
-  true,
-];
+// const jonas = [
+//   'Jonas',
+//   'Silva',
+//   2037 - 1991,
+//   'teacher',
+//   ['Mike', 'Josh', 'Ana'],
+//   true,
+// ];
 
 // for (let i = 0; i < jonas.length; i++) {
 //   console.log(jonas[i]);
@@ -223,3 +223,22 @@ const jonas = [
 //     console.log(`The dice is ${dice} -- loop is about to finish`);
 //   }
 // }
+
+const jonas = {
+  firstName: 'Jonas',
+  lastName: 'Silva',
+  birthYear: 1991,
+  job: 'teacher',
+  friends: ['Peter', 'Steven', 'Mickael'],
+  hasDriversLicence: false,
+  calcAge: function (birthYear) {
+    this.age = 2037 - birthYear;
+    return this.age;
+  },
+};
+
+console.log(
+  `${jonas.firstName} is a ${jonas.age}-year old, ${jonas.job}, and he ${
+    jonas.hasDriversLicence ? 'has' : 'has no'
+  } driver's license`
+);
