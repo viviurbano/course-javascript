@@ -13,7 +13,6 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-// exibe o texto de cada um dos elementos
 for (let i = 0; i < btnsOpenModal.length; i++) {
   btnsOpenModal[i].addEventListener('click', openModal);
 }
