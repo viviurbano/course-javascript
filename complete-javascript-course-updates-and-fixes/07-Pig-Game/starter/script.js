@@ -42,3 +42,19 @@ btnRoll.addEventListener('click', function () {
     player1El.classList.toggle('player--active');
   }
 });
+
+const myName = 'Viviane';
+
+function first() {
+  const age = 300;
+  if (age >= 30) {
+    const decade = 3;
+    var millenial = true;
+  }
+  function second() {
+    const job = 'developer';
+    console.log(`${myName} is a ${age}-old, ${job}`);
+  }
+  second();
+}
+first();
