@@ -12,7 +12,9 @@
 // console.log(newArr);
 
 const nested = [1, 2, 3, [4, 5]];
-
 const [a, b, , [d, e]] = nested;
+// console.log(a, b, d, e);
 
-console.log(a, b, d, e);
+for (const item of nested) {
+  console.log('item', item);
+}
