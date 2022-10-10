@@ -29,3 +29,16 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+console.log(randomColor());
+
+const h1 = document.querySelector('h1');
+console.log(h1);
+console.log(h1.firstElementChild);
+console.log(h1.lastElementChild);
