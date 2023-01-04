@@ -38,7 +38,25 @@ const randomColor = () =>
 
 console.log(randomColor());
 
+// const h1 = document.querySelector('h1');
+// console.log(h1);
+// console.log(h1.firstElementChild);
+// console.log(h1.lastElementChild);
+
+// const alertH1 = function (e) {
+//   alert('mensagem aqui');
+// };
+
+// h1.addEventListener('mouseover', alertH1);
+
+// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 2000);
+// h1.removeEventListener('mouseleave', alertH1);
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  console.log(e.target.getAttribute('href'));
+});
+
 const h1 = document.querySelector('h1');
-console.log(h1);
-console.log(h1.firstElementChild);
-console.log(h1.lastElementChild);
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);

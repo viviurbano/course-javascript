@@ -103,3 +103,14 @@ const greetHeyArr = greetArr('Hey Arrow');
 
 greetHey('Jonas');
 greetHeyArr('Vivi');
+
+console.log(restaurant);
+console.log('-----');
+const values = Object.values(restaurant);
+const entries = Object.entries(restaurant);
+console.log('-----');
+
+console.log(typeof values);
+
+console.log('-----');
+console.log(typeof values);
